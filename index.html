@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practice Test: II Written Test</title>
+<style>
+:root{--bg:#f6f4ee;--card:#fff;--ink:#1d2433;--mut:#5b6475;--line:#d9d6cc;--ac:#1c3f73;--ok:#1b7a43;--okb:#e2f4e8;--bad:#b3261e;--badb:#fbe6e4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a26;--card:#1d2536;--ink:#e8ecf4;--mut:#9aa5ba;--line:#33405a;--ac:#8fb4f0;--ok:#6fd49a;--okb:#16372a;--bad:#ff8a80;--badb:#3d1f1e}}
+:root[data-theme="dark"]{--bg:#141a26;--card:#1d2536;--ink:#e8ecf4;--mut:#9aa5ba;--line:#33405a;--ac:#8fb4f0;--ok:#6fd49a;--okb:#16372a;--bad:#ff8a80;--badb:#3d1f1e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Georgia,"Times New Roman",serif}
+main{max-width:640px;margin:0 auto;padding:16px 14px 90px}
+h1{font-size:1.5rem;margin:8px 0 4px;color:var(--ac)}
+p.sub{margin:0 0 14px;color:var(--mut);font-family:system-ui,sans-serif;font-size:.9rem}
+h2{font-size:1.1rem;margin:26px 0 4px;color:var(--ac);border-bottom:2px solid var(--ac);padding-bottom:4px}
+.hint{font:.85rem system-ui,sans-serif;color:var(--mut);margin:0 0 8px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin:8px 0}
+.q.ok{border-color:var(--ok);background:var(--okb)}.q.no{border-color:var(--bad);background:var(--badb)}
+.q p{margin:0 0 8px}
+input[type=text]{width:100%;font:1rem system-ui,sans-serif;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.opt{display:block;width:100%;text-align:left;font:.95rem system-ui,sans-serif;padding:10px;margin:5px 0;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);cursor:pointer}
+.opt.sel{border:2px solid var(--ac);font-weight:600}
+.fb{font:.85rem system-ui,sans-serif;margin-top:6px;display:none}
+.q.no .fb{display:block;color:var(--bad)}.q.ok .fb{display:block;color:var(--ok)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;justify-content:center;align-items:center}
+button.go{font:600 1rem system-ui,sans-serif;padding:11px 18px;border:0;border-radius:8px;background:var(--ac);color:var(--bg);cursor:pointer}
+button.go.alt{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+#score{font:700 1rem system-ui,sans-serif;color:var(--ink)}
+input:focus-visible,button:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+</style></head><body><main>
+<h1>Practice test: II Written Test</h1>
+<p class="sub">10th grade, Units 4, 5 and 6. Answer everything, then tap Check answers.</p>
+<div id="root"></div></main>
+<div class="bar"><span id="score"></span><button class="go" id="chk">Check answers</button><button class="go alt" id="rst">Try again</button></div>
+<script>
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const ADJ=["bad-tempered","cautious","creative","realistic","responsible","arrogant","impatient","boring"];
+const IDI=["a shoulder to cry on","get along like a house on fire","bury the hatchet","have a falling out","like two peas in a pod","joined at the hip","know someone inside out","clear the air"];
+const LK=["Although","Despite","In spite of","However","Even though","Nevertheless"];
+const f=(q,a)=>({t:"f",q,a:Array.isArray(a)?a:[a]});
+const m=(q,c,o)=>({t:"m",q,c,o:shuf(o)});
+const adj=(q,c)=>m(q,c,[c,...shuf(ADJ.filter(x=>x!==c)).slice(0,3)]);
+const idi=(q,c,ex=[])=>m(q,c,[c,...shuf(IDI.filter(x=>x!==c&&!ex.includes(x))).slice(0,3)]);
+const S=[
+{h:"1. be / get used to vs. used to",s:"Complete with the correct form of the verb, or with be / get.",q:[
+f("That supermarket used to ___ a movie theater. (be)","be"),
+f("When I started my Saturday job, I couldn’t get used to ___ early. (get up)","getting up"),
+f("My mother has finally gotten used to ___ video calls to us. (make)","making"),
+f("João isn’t used to ___ American food yet. (eat)","eating"),
+f("Lucy used to ___ jeans all the time when she was a student. (wear)","wear"),
+f("Julia is Mexican, so she ___ used to hot weather. (be or get)",["is","gets"]),
+f("It never takes me long to ___ used to being in another country. (be or get)","get"),
+f("My father lived in the UK for years, but he never ___ used to driving on the left. (be or get)",["got","gotten"]),
+f("Kasper grew up in Norway. As a child he ___ used to skiing to school. (be or get)","was"),
+f("People in some parts of the world ___ used to experiencing earthquakes. (be or get)","are")]},
+{h:"2. Personality adjectives",s:"Choose the adjective that completes the dialogue.",q:[
+adj("A: She gets angry at everything I say. B: She’s really ___.","bad-tempered"),
+adj("A: He drives quite slowly. B: Yes, he’s a ___ driver.","cautious"),
+adj("A: She designs such different, interesting things! B: Yes, she’s very ___.","creative"),
+adj("A: Let’s go to Australia. B: Oh, be ___. We don’t have enough money.","realistic"),
+adj("A: Do you think she’ll do what she promised? B: Oh yes, she’s very ___.","responsible"),
+adj("A: She thinks she’s the best. B: She’s really ___.","arrogant"),
+adj("A: Hurry up! B: OK. Don’t be so ___!","impatient"),
+adj("A: He isn’t very interesting, is he? B: No, he’s a bit ___.","boring")]},
+{h:"3. Adverbial phrases",s:"Write the sentence ending with an adverbial phrase (with + noun, or in a(n) ... way).",q:[
+f("We really like Ms. Philips, who teaches PE in an ___ way. (enjoyable)","enjoyable"),
+f("We all jumped ___ when the door slammed. (surprise)","with surprise"),
+f("The fans screamed ___ when the band walked onto the stage. (excitement)","with excitement"),
+f("Lisa started to shake ___ when she looked over the cliff. (fear)","with fear"),
+f("Jack approached the lion ___. (fear)","with fear"),
+f("Akemi carried three suitcases ___. (difficulty)","with difficulty"),
+f("The boys ate burgers ___. (enthusiasm)","with enthusiasm"),
+f("Greg rode the horse ___. (awkward)","in an awkward way"),
+f("Elena watched the soccer game ___. (interest)","with interest"),
+f("Maria asked her hairdresser to style her hair ___. (different)","in a different way")]},
+{h:"4. didn’t need to / needn’t have",s:"Type didn’t need to or needn’t.",q:[
+m("The battery for my laptop has run out.","You need to get a charger.",["You need to get a charger.","You need to delete some files.","You needed to get an adapter.","You needed to do more studying for it."]),
+m("I didn’t have an American plug.","You needed to get an adapter.",["You needed to get an adapter.","You need to get a charger.","You needn’t have left home so early.","You needed to take an earlier bus."]),
+m("I bought a Spanish dictionary yesterday.","I have one. You needn’t have bought one.",["I have one. You needn’t have bought one.","You needed to take an earlier bus.","You need to delete some files.","You needed to get an adapter."]),
+m("I arrived an hour before the concert.","You needn’t have left home so early.",["You needn’t have left home so early.","You needed to take an earlier bus.","You needed to do more studying for it.","You need to get a charger."]),
+f("I bought two concert tickets. My friend had already bought them. → I ___ have bought the tickets.",["needn’t","needn't","need not"]),
+f("Daniel did his homework the night before. → He ___ do his homework last night.",["didn’t need to","didn't need to","did not need to"]),
+f("Sara passed her history exam easily without studying. → She ___ study.",["didn’t need to","didn't need to","did not need to"]),
+f("I took a thick sweater, but it was a hot, sunny day. → I ___ have taken a thick sweater.",["needn’t","needn't","need not"]),
+f("We took a taxi, but the hall was only 200 meters away. → We ___ have taken a taxi.",["needn’t","needn't","need not"]),
+f("I’d already messaged Louisa. → I ___ call her.",["didn’t need to","didn't need to","did not need to"])]},
+{h:"5. Comparatives",s:"Complete the sentence. Write only the missing words.",q:[
+f("The boys are growing ___ and ___. (tall)","taller and taller"),
+f("The Earth is getting ___ and ___. (hot)","hotter and hotter"),
+f("Food is getting ___ and ___ expensive.","more and more"),
+f("The louder the music gets, the ___ my headache gets. (bad)","worse"),
+f("The faster you drive, the ___ it is. (dangerous)","more dangerous"),
+f("The ___ you are, the better food tastes. (hungry)","hungrier"),
+f("The older people get, the ___ sleep they need. (little)","less"),
+f("Budgetline is nowhere near ___ comfortable as Worldair.","as"),
+m("Which sentence says X is MUCH LESS than Y?","X is not nearly as good as Y.",["X is not nearly as good as Y.","X is just as good as Y.","X is far better than Y.","X is good and good."]),
+f("Worldair is ___ more expensive than Budgetline. (use much, far or a lot)",["much","far","a lot"])]},
+{h:"6. Linkers of contrast",s:"Choose the correct linker.",q:[
+m("___ I own two bikes, I can’t ride a bike.","Although",["Although","Despite","However","In spite of"]),
+m("___ being short, I’m good at basketball.","Despite",["Although","Despite","However","Even though"]),
+m("My mom’s French. ___, I don’t speak French.","However",["Although","Despite","However","Even though"]),
+m("I love Italian food ___ I don’t like pizza.","even though",["even though","despite","however","nevertheless"]),
+m("I always go to bed early. ___, I’m always late for school.","Nevertheless",["Although","Nevertheless","Despite","Even though"]),
+m("___ being only 14, I’m 175 cm tall.","In spite of",["Although","In spite of","However","Nevertheless"])]},
+{h:"7. Friendship idioms",s:"Choose the idiom that fits.",q:[
+idi("If you’re feeling sad, I’m here for you.","a shoulder to cry on"),
+idi("Izzy and Amalia like each other a lot and became friends really quickly.","get along like a house on fire"),
+idi("We decided to stop arguing and become friends again.","bury the hatchet",["clear the air"]),
+idi("Annie and her twin look exactly the same.","like two peas in a pod"),
+idi("Max hasn’t spoken to David since David broke his gaming console.","have a falling out"),
+idi("Sadie and Kim are always together.","joined at the hip"),
+idi("My best friend always knows how I’m feeling, even if I haven’t told her.","know someone inside out"),
+idi("I had a big argument with my parents, but there are no bad feelings now.","clear the air",["bury the hatchet"])]}];
+const norm=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/[.!]/g,"").replace(/\s+/g," ").trim();
+const root=document.getElementById("root"),els=[];
+function build(){root.innerHTML="";els.length=0;
+S.forEach(sec=>{const h=document.createElement("h2");h.textContent=sec.h;root.append(h);
+const p=document.createElement("p");p.className="hint";p.textContent=sec.s;root.append(p);
+sec.q.forEach(q=>{const d=document.createElement("div");d.className="q";
+const t=document.createElement("p");t.textContent=q.q;d.append(t);const o={q,d,val:""};
+if(q.t==="f"){const i=document.createElement("input");i.type="text";i.autocomplete="off";i.autocapitalize="off";i.spellcheck=false;i.setAttribute("aria-label","Answer");i.oninput=()=>o.val=i.value;d.append(i);o.inp=i}
+else q.o.forEach(x=>{const b=document.createElement("button");b.className="opt";b.textContent=x;b.onclick=()=>{if(o.done)return;o.val=x;d.querySelectorAll(".opt").forEach(y=>y.classList.toggle("sel",y===b))};d.append(b)});
+const fb=document.createElement("div");fb.className="fb";d.append(fb);o.fb=fb;root.append(d);els.push(o)})});
+document.getElementById("score").textContent=""}
+document.getElementById("chk").onclick=()=>{let ok=0;
+els.forEach(o=>{o.done=true;const q=o.q;const good=q.t==="f"?q.a.some(a=>norm(a)===norm(o.val)):o.val===q.c;
+if(good)ok++;o.d.classList.remove("ok","no");o.d.classList.add(good?"ok":"no");
+o.fb.textContent=good?"Correct":"Answer: "+(q.t==="f"?q.a[0]:q.c)});
+document.getElementById("score").textContent=ok+" / "+els.length;
+window.scrollTo({top:0,behavior:"smooth"})};
+document.getElementById("rst").onclick=()=>{build();window.scrollTo({top:0,behavior:"smooth"})};
+build();
+</script></body></html>
